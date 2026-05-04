@@ -2,11 +2,20 @@ const connection = require('../data/db');
 
 function index(req, res) {
 
-    const movies = 'SELECT * FROM movies';
+    const sqlMovies = 'SELECT * FROM movies';
 
-    connection.query(movies, (err, results) => {
+
+    connection.query(sqlMovies, (err, results) => {
         err && res.status(500).json({ error: 'database query failed' });
-        res.json(results)
+
+        const movies = results.map((movie) => {
+            return {
+                ...movie,
+                image: req.imagePath + movie.image
+            }
+        })
+
+        res.json(movies)
     })
 }
 
