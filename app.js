@@ -7,6 +7,9 @@ const moviesRouter = require("./router/appRouters");
 
 const errorsHandler = require("./middlewares/errorsHandler");
 const notFound = require('./middlewares/notFound');
+const ImagePath = require('./middlewares/imagePath');
+
+app.use(ImagePath);
 
 app.use(cors({
     origin: 'http://localhost:5173'
